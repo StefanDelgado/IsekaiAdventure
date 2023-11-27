@@ -6,7 +6,7 @@ public class Main {
         dialogues.delay(2);
         System.out.println(" ");
         System.out.println(" **********************");
-        System.out.println(" Isekai Adventure");
+        System.out.println(" Epic Weaver: Threads Unveiled");
         System.out.println(" **********************");
         dialogues.delay(2);
         System.out.println(" ");
@@ -31,12 +31,18 @@ public class Main {
                 break;
 
             } else {
+                // Introduction
                 //dialogues.goddess1();
 
+                // Player name
                 String pName = input.nextLine();
                 uPlayer.setName(pName);
-                dialogues.goddess2(pName);
 
+                // Player Job
+                dialogues.goddess2(uPlayer);
+                String pJob = input.nextLine();
+
+                dialogues.goddess3(uPlayer);
             }
         }
     }
