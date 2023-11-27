@@ -21,7 +21,7 @@ public class Main {
         int x = 0;
 
         while (x < gloop) {
-            //welcome();
+            welcome();
             gloop++;
             String start = input.nextLine();
 
@@ -32,7 +32,7 @@ public class Main {
 
             } else {
                 // Introduction
-                //dialogues.goddess1();
+                dialogues.goddess1();
 
                 // Player name
                 String pName = input.nextLine();
