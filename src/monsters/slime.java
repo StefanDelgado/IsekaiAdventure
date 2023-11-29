@@ -3,7 +3,7 @@ public class slime implements Stat {
     private String name ="Slime";
     protected int baseLevel;
     protected String job;
-    protected int atk = 50;
+    protected int atk = 1;
     protected int def = 1;
     protected int hp = 10;
     protected int mp = 10;
