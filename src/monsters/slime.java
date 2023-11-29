@@ -1,29 +1,19 @@
-import javax.xml.namespace.QName;
-
-public class Player extends Combat implements Stat{
-    private String name ="";
+package monsters;
+public class slime implements Stat {
+    private String name ="Slime";
     protected int baseLevel;
     protected String job;
-    protected int atk = 10;
-    protected int def = 5;
-    protected int hp = 100;
+    protected int atk = 50;
+    protected int def = 1;
+    protected int hp = 10;
     protected int mp = 10;
     protected int sp = 10;
 
-
-    public Player() {
-    super();
-    }
-
+    @Override
     public String getName() {
         return this.name;
     }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public void setJob(String job) {
-        this.job = job;
-    }
+
     @Override
     public String getJob() {
         return this.job;
@@ -53,8 +43,4 @@ public class Player extends Combat implements Stat{
     public int getDef() {
         return this.def;
     }
-
-
-
-
 }

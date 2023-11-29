@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import monsters.*;
 public class Main {
     static Scanner input = new Scanner(System.in);
     static void welcome(){
@@ -15,13 +16,16 @@ public class Main {
     public static void main(String[] args) {
         dialogues message = new dialogues();
         Player uPlayer = new Player();
+        JobClass jobclass = new JobClass();
+        slime Slime = new slime();
+
 
 
         int gloop = 10;
         int x = 0;
 
         while (x < gloop) {
-            welcome();
+            //welcome();
             gloop++;
             String start = input.nextLine();
 
@@ -32,17 +36,32 @@ public class Main {
 
             } else {
                 // Introduction
-                dialogues.goddess1();
+                //dialogues.goddess1();
 
                 // Player name
+                System.out.print(" Enter name: ");
                 String pName = input.nextLine();
+                System.out.print(" ");
                 uPlayer.setName(pName);
 
                 // Player Job
-                dialogues.goddess2(uPlayer);
-                String pJob = input.nextLine();
+                //dialogues.goddess2(uPlayer);
+                System.out.print("Enter Job : ");
+                int pJob = input.nextInt();
+                System.out.print(" ");
+                uPlayer.setJob(jobclass.mainJob(pJob));
 
-                dialogues.goddess3(uPlayer);
+                // Player embark
+                //dialogues.goddess3(uPlayer);
+
+                // Test Combat
+                System.out.println("Entering Combat Tutorial");
+                System.out.print(" ");
+                Combat combat = new Combat(uPlayer);
+                combat.setEntity(Slime);
+                combat.CombatMode();
+
+                break;
             }
         }
     }

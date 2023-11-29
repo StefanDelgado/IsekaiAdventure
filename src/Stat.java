@@ -1,6 +1,10 @@
+
 public interface Stat {
-public int level();
-public String job();
-public int attack();
-public int defence();
+    String getName();
+    String getJob();
+    int getHp();
+    int getMp();
+    int getSp();
+    int getAtk();
+    int getDef();
 }
