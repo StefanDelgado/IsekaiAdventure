@@ -66,12 +66,14 @@ public class dialogues {
         System.out.println(" " + uPlayer.getName() + " , mortal who was destined by fate, you stand before me, Isolde, the goddess who governs life and death.");
         delay(3);
         System.out.println(" You have destined to come here for a purpose, not by mistake, but you are the only one who may weave the thread of fate since another world is in peril.");
+        System.out.print(" > Enter to continue...");
         input.nextLine();
 
         System.out.println(" ");
 
         System.out.println(" " + uPlayer.getName() + ":");
         System.out.println(" (Feeling confuse) Destined? What do you mean?");
+        System.out.print(" > Enter to continue...");
         input.nextLine();
 
         /// *********** I should put something here poor user ignored by Isolde *********** ///
@@ -92,12 +94,14 @@ public class dialogues {
     static void goddess3(Player uPlayer) {
         System.out.println(" Isolde:");
         System.out.println(" Excellent choice");
+        System.out.print(" > Enter to continue...");
         input.nextLine();
 
         System.out.println(" ");
 
         System.out.println(" Isolde:");
         System.out.println(" Embrace your destiny, and may your journey be woven into the fabric of a new thread.");
+        System.out.print(" > Enter to continue...");
         input.nextLine();
 
         System.out.println(" ");
@@ -106,6 +110,7 @@ public class dialogues {
         System.out.println(" (Explaining) A connection to the threads of fate, a resonance with the ebb and flow of destiny.");
         delay(2);
         System.out.println(" The air shimmering with an unseen magic shall guide you.");
+        System.out.print(" > Enter to continue...");
         input.nextLine();
 
         System.out.println(" ");
@@ -114,12 +119,14 @@ public class dialogues {
         System.out.println(" You may choose to embark on a new existence in a distant realm, filled with adventures and challenges.");
         delay(3);
         System.out.println(" Alternatively, you can opt for the path to the afterlife, where everything fades into the infinite void. The choice is yours.");
+        System.out.print(" > Enter to continue...");
         input.nextLine();
 
         System.out.println(" ");
 
         System.out.println(" " + uPlayer.getName() + ":");
         System.out.println(" (Contemplating) Another world? Challenges? I never expected... What should I choose?");
+        System.out.print(" > Enter to continue...");
         input.nextLine();
 
         System.out.println(" ");
@@ -128,6 +135,7 @@ public class dialogues {
         System.out.println(" The threads of destiny await your decision. Each path leads to a destiny unknown. ");
         delay(3);
         System.out.println(" Choose with gratitude for the chance at redemption, and ponder the diverging paths before you. You are the epic weaver of your own fate, ." + uPlayer.getName());
+        System.out.print(" > Enter to continue...");
         input.nextLine();
 
         System.out.println(" ");
@@ -141,7 +149,7 @@ public class dialogues {
         System.out.println(" decorated with towering arches and finely carved stone within the glowing vortex.");
         System.out.println(" The air shimmered with mystical energy as if the very walls resonated with the magic of your arrival. ");
         delay(5);
-        System.out.println(" Press Enter to continue");
+        System.out.print(" > Enter to continue...");
         input.nextLine();
         System.out.println("<---------------    Work in Progress   ----------------->");
     }

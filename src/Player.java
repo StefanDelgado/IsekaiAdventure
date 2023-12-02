@@ -3,6 +3,7 @@ import javax.xml.namespace.QName;
 public class Player extends Combat implements Stat{
     private String name ="";
     protected int baseLevel;
+    protected int experience;
     protected String job;
     protected int atk = 10;
     protected int def = 5;
@@ -15,6 +16,10 @@ public class Player extends Combat implements Stat{
     super();
     }
 
+    public void setBaseLevel(int lvl){
+        lvl = lvl + baseLevel;
+        this.baseLevel = lvl;
+    }
     public String getName() {
         return this.name;
     }

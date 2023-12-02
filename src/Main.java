@@ -17,7 +17,8 @@ public class Main {
         dialogues message = new dialogues();
         Player uPlayer = new Player();
         JobClass jobclass = new JobClass();
-        slime Slime = new slime();
+        Monsters monsters = new Monsters();
+        Level level = new Level();
 
 
 
@@ -58,9 +59,16 @@ public class Main {
                 System.out.println("Entering Combat Tutorial");
                 System.out.print(" ");
                 Combat combat = new Combat(uPlayer);
-                combat.setEntity(Slime);
+                combat.setEntity(monsters.setMonster());
                 combat.CombatMode();
-
+                int y =0;
+                int monsterLoop = 2;
+                while(y < monsterLoop){
+                    y++;
+                    System.out.println("Another monster appeared!!! ");
+                    combat.setEntity(monsters.setMonster());
+                    combat.CombatMode();
+                }
                 break;
             }
         }
