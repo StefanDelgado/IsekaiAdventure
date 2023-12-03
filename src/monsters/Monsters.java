@@ -1,7 +1,7 @@
 package monsters;
 
-public class Monsters implements Stat{
-    private String name;
+public abstract class Monsters implements Stat{
+    private String name = " Monsters name";
     private String job;
     private int baseLevel;
     private int experience;
@@ -22,17 +22,25 @@ public class Monsters implements Stat{
     this.sp = sp;
     }
 
+    public Monsters(String name) {
+        this.name = name;
+    }
+
     public Monsters() {
 
     }
+
     public Monsters setMonster(){
         slime Slime = new slime();
         return Slime;
     }
+    public void setName(String name){
+        this.name = name;
+    }
 
     public String getName(){
 
-        return this.name;
+        return name;
     }
     public String getJob(){
         return this.job;

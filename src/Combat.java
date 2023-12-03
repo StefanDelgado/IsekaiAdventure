@@ -1,15 +1,10 @@
-import java.util.Scanner;
+import java.util.*;
+
 import monsters.*;
 import java.lang.Math;
 public class Combat {
+
     static Scanner input = new Scanner(System.in);
-
-
-
-    private   int combatLoop = 10;
-    private   int loop = 0;
-    private int action;
-
 
     // <------------- Stat variables -------------> \\
     protected int pHP;
@@ -18,107 +13,105 @@ public class Combat {
     protected int eHP;
     protected int eMP;
     protected int eSP;
+
     // <------------- Player variables -------------> \\
+    int [] isAlive;
     protected String pname;
     private   String pJob;
     private   int plvl;
     private int pExp;
     protected int pAttack;
     protected int pDefence;
+    protected int cPlayerAtk;
+    protected int cPlayerDef;
     protected int cPlayerHP;
     protected int cPlayerMP;
     protected int cPlayerSP;
+
     // <------------- Entity variables -------------> \\
     private   String eName;
     private String eJob;
     private int elvl;
     private int exp;
+    private int eAtk;
+    private int eDef;
+    protected int cEntityAttack;
+    protected int cEntityDefence;
     protected int cEntityHP;
     protected int cEntityMP;
     protected int cEntitySP;
-    protected int cEntityAttack;
-    protected int cEntityDefence;
 
 
-    public Combat(Player uPlayer){
-        this.pname    = uPlayer.getName();
-        this.pJob = uPlayer.getJob();
-        this.plvl = uPlayer.baseLevel;
-        this.pExp = uPlayer.experience;
-        this.pHP      = uPlayer.getHp();
-        this.pSP      = uPlayer.getSp();
-        this.pMP      = uPlayer.getMp();
-        this.pAttack = uPlayer.getAtk();
-        this.pDefence = uPlayer.getDef();
-        this.cPlayerHP = pHP;
-        this.cPlayerMP = pMP;
-        this.cPlayerSP = pSP;
-    }
-    public void setEntity(Monsters monsters){
-        this.eName = monsters.getName();
-        this.eJob = monsters.getJob();
-        this.exp = monsters.getExperience();
-        this.eHP      = monsters.getHp();
-        this.eSP      = monsters.getSp();
-        this.eMP      = monsters.getMp();
-        this.cEntityAttack = monsters.getAtk();
-        this.cEntityDefence = monsters.getDef();
-        this.cEntityHP = eHP;
-        this.cEntityMP = eMP;
-        this.cEntitySP = eSP;
-    }
+    // Default Constructor
     public Combat() {
 
     }
-    public static void delay(int secondsToSleep){
-        try {
-            Thread.sleep(secondsToSleep * 1000);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-    }
 
-    public void showStatus(){
-        System.out.println(" Your Status: ");
-        System.out.println(" Name: " + pname);
-        System.out.println(" Job : " + pJob);
-        System.out.println(" Level : " + plvl);
-        System.out.println(" HP  : " + pHP);
-        System.out.println(" MP  : " + pMP);
-        System.out.println(" SP  : " + pSP);
-        System.out.println(" ATK : " + pAttack);
-        System.out.println(" DEF : " + pDefence);
+    // Player Constructor
+    public Combat(Player uPlayer){
+        this.pname      = uPlayer.getName();
+        this.pJob       = uPlayer.getJob();
+        this.plvl       = uPlayer.baseLevel;
+        this.pExp       = uPlayer.experience;
+        this.pHP        = uPlayer.getHp();
+        this.pSP        = uPlayer.getSp();
+        this.pMP        = uPlayer.getMp();
+        this.pAttack    = uPlayer.getAtk();
+        this.pDefence   = uPlayer.getDef();
+        this.cPlayerAtk = pAttack;
+        this.cPlayerDef = pDefence;
+        this.cPlayerHP  = pHP;
+        this.cPlayerMP  = pMP;
+        this.cPlayerSP  = pSP;
     }
-    public void examine(){
-        System.out.println(" Enemy Status: ");
-        System.out.println(" Name: " + eName);
-        System.out.println(" Job: " + eJob);
-        System.out.println(" Level: " + elvl);
-        System.out.println(" HP  : " + eHP);
-        System.out.println(" MP  : " + eMP);
-        System.out.println(" SP  : " + eSP);
-        System.out.println(" ATK : " + cEntityAttack);
-        System.out.println(" DEF : " + cEntityDefence);
-    }
-    public void entityTurn(){
-        int min = 1;
-        int max = 3;
-        int eAction = (int)(Math.random()*(max-min)+min);
-
-        switch (eAction){
-            case 1:
-                System.out.println(" " + eName + " attacks " + pname);
-                System.out.println(" "+ pname + " took " + cEntityAttack + " damage!!");
-                if (pDefence < cEntityAttack) {
-                    cPlayerHP = cPlayerHP - (cEntityAttack - pDefence);
-                } else {
-                    cPlayerHP -= cEntityAttack;
-                }
+    // Initialize Entity
+    void initializeEntity(String[] Entity, int[] numOfMonsters){
+        Monsters Slime = new slime();
+        Monsters Goblin = new goblin();
+        int remainingMonsters = 0;
+        for (int x = 0; x < Entity.length; x++) {
+            if (Entity[x].equals(Slime.getName()) && remainingMonsters <= numOfMonsters[x]) {
+                setEntity(Slime);
+                numOfMonsters[x] -= 1;
                 break;
-            case 2:
-                System.out.println(" " + eName + " Choose to defend ");
+            } else if (Entity[x].equals(Goblin.getName()) && remainingMonsters <= numOfMonsters[x]) {
+                setEntity(Goblin);
+                numOfMonsters[x] -= 1;
+                break;
+            } else {
+                break;
+            }
         }
+        }
+
+    // Setting Entity
+    public void setEntity(Monsters monsters){
+        this.eName          = monsters.getName();
+        this.eJob           = monsters.getJob();
+        this.elvl           = monsters.getBaseLevel();
+        this.exp            = monsters.getExperience();
+        this.eHP            = monsters.getHp();
+        this.eSP            = monsters.getSp();
+        this.eMP            = monsters.getMp();
+        this.eAtk           = monsters.getAtk();
+        this.eDef           = monsters.getDef();
+        this.cEntityAttack  = eAtk;
+        this.cEntityDefence = eDef;
+        this.cEntityHP      = eHP;
+        this.cEntityMP      = eMP;
+        this.cEntitySP      = eSP;
     }
+
+    void resetEntity(){
+        this.cEntityAttack  = eAtk;
+        this.cEntityDefence = eDef;
+        this.cEntityHP      = eHP;
+    }
+    void resetPlayer(){
+        this.cPlayerAtk = pAttack;
+        this.cPlayerDef = pDefence;
+    }
+    // Setting player level up stats
     public void setPlayerStats(int[] playerStats, boolean hadLevelUp){
         this.pAttack = playerStats[0];
         this.pDefence = playerStats[1];
@@ -132,75 +125,200 @@ public class Combat {
             System.out.println(" Player status has been Restored due to level up.");
         }
     }
+
+    // Delay method
+    public static void delay(int secondsToSleep){
+        try {
+            Thread.sleep(secondsToSleep * 1000L);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    // Show player status
+    public void showStatus(){
+        System.out.println(" Your Status: ");
+        System.out.println(" Name: " + pname);
+        System.out.println(" Job : " + pJob);
+        System.out.println(" Level : " + plvl);
+        System.out.println(" HP  : " + pHP);
+        System.out.println(" MP  : " + pMP);
+        System.out.println(" SP  : " + pSP);
+        System.out.println(" ATK : " + pAttack);
+        System.out.println(" DEF : " + pDefence);
+    }
+
+    // Show enemy Status
+    public void examine(){
+        System.out.println(" Enemy Status: ");
+        System.out.println(" Name: " + eName);
+        System.out.println(" Job: " + eJob);
+        System.out.println(" Level: " + elvl);
+        System.out.println(" HP  : " + eHP);
+        System.out.println(" MP  : " + eMP);
+        System.out.println(" SP  : " + eSP);
+        System.out.println(" ATK : " + cEntityAttack);
+        System.out.println(" DEF : " + cEntityDefence);
+    }
+
+    // Enemy Action
+    public void entityTurn(){
+        byte min = 1;
+        byte max = 3;
+        byte eAction = (byte)(Math.random()*(max-min)+min);
+
+        switch (eAction){
+            case 1:
+                System.out.println(" " + eName + " attacks " + pname);
+                System.out.println(" "+ pname + " took " + cEntityAttack + " damage!!");
+                if (pDefence < cEntityAttack) {
+                    cPlayerHP = cPlayerHP - (cEntityAttack - pDefence);
+                } else {
+                    cPlayerHP -= cEntityAttack;
+                }
+                break;
+            case 2:
+                max = 20;
+                byte playerDefend = (byte)(Math.random()*(max-min)+min);
+                System.out.println(" " + eName + " Choose to defend ");
+                if(playerDefend <= 12 && cPlayerAtk < cEntityDefence){
+                    System.out.println(" " + pname + " failed defend");
+                } else {
+                    System.out.println(" " + pname + " successfully defend");
+                    cPlayerAtk = 0;
+                }
+        }
+    }
+    // Player is alive
+    void setIsAlive(){
+          isAlive = new int[]{pAttack, pDefence, pHP, pMP, pSP};
+    }
+    // Main Combat method
     public void CombatMode() {
-        Player uPlayer = new Player();
         Level level = new Level();
 
         System.out.println(" ");
         System.out.println(" You have entered in combat");
         delay(1);
-        System.out.println(" Prepare yourself brave Hero!!!");
+        System.out.println(" Initiate Combat");
         System.out.println(" ");
         delay(2);
         System.out.println(" A "+ eName +" appeared");
 
 
+        int combatLoop = 10;
+        int loop = 0;
+        byte flee = 0;
         while (loop < combatLoop) {
+            loop++;
+
             int[] playerStats= {pAttack, pDefence, pHP, pMP, pSP };
             delay(2);
             System.out.println(" ");
-            System.out.println(" Your stats: HP (" + cPlayerHP + "/" + pHP + ") MP (" + cPlayerMP + "/" + pMP + ") SP (" + cPlayerSP + "/" + pSP + ")" );
-
-            System.out.println(eName + " stats: HP (" + cEntityHP + "/" + eHP + ") MP (" + cEntityMP + "/" + eMP + ") SP (" + cEntitySP + "/" + eSP + ")" );
             System.out.println(" What will you do?");
-            System.out.println("""
-                     1. Attack
-                     2. Defend
-                     3. Flee
-                     4. Show Stats
-                     5. Examine
-                    """);
-            System.out.print(" ");
-            action = input.nextInt();
-            switch (action){
-                case 1:
-                    System.out.println(" "+ eName +" took " + pAttack + " damage");
-                    cEntityHP = cEntityHP - (pAttack - cEntityDefence);
-                    break;
-                case 2:
-                    System.out.print(" " + pname + " is defending");
-                    break;
-                case 3:
-                    System.out.println(" " + pname + " is running away");
-                    break;
-                case 4:
-                    showStatus();
-                    break;
-                case 5:
-                    examine();
-                    break;
+            boolean aLoop = true;
+            while (aLoop) {
+                System.out.println(" Your stats: HP (" + cPlayerHP + "/" + pHP + ") MP (" + cPlayerMP + "/" + pMP + ") SP (" + cPlayerSP + "/" + pSP + ")" );
+                System.out.println(" " + eName + " stats: HP (" + cEntityHP + "/" + eHP + ") MP (" + cEntityMP + "/" + eMP + ") SP (" + cEntitySP + "/" + eSP + ")" );
+                System.out.println("""
+                         ********************************
+                         1. Action
+                         2. Show Stats
+                         3. Examine
+                         ********************************
+                        """);
+                System.out.print(" /> ");
+                int action = input.nextInt();
+                switch (action) {
+                    case 1: // Action
+                        System.out.println("""
+                                 ********************************
+                                 1. Basic Attack  4. Flee
+                                 2. Defend        5. Back
+                                 3. Items
+                                 ********************************
+                                """);
+                        System.out.print(" /> ");
+                        action = input.nextInt();
+                        switch (action){
+                            case 1: // Attack
+                                int cAtk = pAttack - eDef;
+                                System.out.println(" " + eName + " took " + cAtk + " damage");
+                                if (pAttack >= cEntityHP){
+                                    cEntityHP = 0;
+                                } else {
+                                    cEntityHP = cEntityHP - (pAttack - cEntityDefence);
+                                }
+                                aLoop = false;
+                                break;
+                            case 2: // Defend
+                                System.out.print(" " + pname + " is defending");
+                                byte min = 1;
+                                byte max = 20;
+                                byte playerDefend = (byte) (Math.random() * (max - min) + min);
+                                if (playerDefend <= 12) {
+                                    System.out.println(" " + pname + " failed defend");
+                                } else {
+                                    System.out.println(" " + pname + " successfully defend");
+                                    cEntityAttack = 0;
+                                }
+                                aLoop = false;
+                                break;
+                            case 3: // Items
+                                aLoop = false;
+                                break;
+                            case 4: // Flee
+                                System.out.println(" " + pname + " tried to escape");
+                                flee++;
+                                aLoop = false;
+                                break;
+                            case 5: // Back
+                                break;
+                        }
+                        break;
+                    case 2: // Show Stats
+                        showStatus();
+                        break;
+                    case 3: // Examine Enemy
+                        examine();
+                        break;
+                }
             }
+            // Entity defeat line
             if (cEntityHP <= 0){
                 System.out.println(" You have defeated " + eName + " !!!");
                 System.out.println(" You have obtained " + exp + " EXP");
                 delay(2);
                 pExp += exp;
 
+                System.out.println(pExp);
                 level.lvlExperience(pExp, plvl, playerStats);
                 this.plvl = level.getLevel();
                 setPlayerStats(level.getPlayerStats(), level.getHadLevelUp());
                 delay(2);
                 break;
             }
+            //
+            if (flee == 3){
+                System.out.println(" You have successfully run away...");
+                break;
+            }
+            // Entity turn to action
             entityTurn();
+            // Reset Attack and Defence Stats
+            resetEntity();
+            resetPlayer();
             delay(2);
+            // Game over
             if(cPlayerHP <= 0) {
                 System.out.println(" <---------- Game Over ---------->");
                 break;
             }
-
         }
+        setIsAlive();
+        if (loop == combatLoop){
+            System.out.println(" " + eName + " got bored and started to ignore you");
+        }
+        delay(2);
     }
-
-
 }

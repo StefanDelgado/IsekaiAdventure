@@ -1,5 +1,6 @@
 import java.util.Scanner;
 import monsters.*;
+import Stages.*;
 public class Main {
     static Scanner input = new Scanner(System.in);
     static void welcome(){
@@ -14,63 +15,63 @@ public class Main {
         System.out.println(" Type Any to Start or X to End and press Enter");
     }
     public static void main(String[] args) {
-        dialogues message = new dialogues();
+        //dialogues message = new dialogues();
         Player uPlayer = new Player();
-        JobClass jobclass = new JobClass();
-        Monsters monsters = new Monsters();
-        Level level = new Level();
+        //JobClass jobclass = new JobClass();
+        Stage stage1 = new Forest();
+        Combat combat;
+
+        int x;
+        welcome();
+        String start = input.nextLine();
+
+        if (start.equals("x") || start.equals("X")) {
+            System.out.println(" Adventure shutting down...");
+        } else {
+            System.out.flush();
+            // Introduction
+            //dialogues.goddess1();
+
+            // Player name
+            System.out.print(" Enter name: ");
+            String pName = input.nextLine();
+            System.out.println(" ");
+            uPlayer.setName(pName);
+
+            // Player Job ------> WIP <------
+            //dialogues.goddess2(uPlayer);
+
+            /* ------> WIP <------
+            System.out.print("Enter Job : ");
+            int pJob = input.nextInt();
+            System.out.print(" ");
+            uPlayer.setJob(jobclass.mainJob(pJob));
+            */
 
 
+            // Player embark
+            //dialogues.goddess3(uPlayer);
 
-        int gloop = 10;
-        int x = 0;
+            combat = new Combat(uPlayer); // Player initialize
 
-        while (x < gloop) {
-            //welcome();
-            gloop++;
-            String start = input.nextLine();
-
-            if (start.equals("x") || start.equals("X")) {
-                System.out.println(" Adventure shutting down...");
-                x = gloop;
-                break;
-
-            } else {
-                // Introduction
-                //dialogues.goddess1();
-
-                // Player name
-                System.out.print(" Enter name: ");
-                String pName = input.nextLine();
-                System.out.print(" ");
-                uPlayer.setName(pName);
-
-                // Player Job
-                //dialogues.goddess2(uPlayer);
-                System.out.print("Enter Job : ");
-                int pJob = input.nextInt();
-                System.out.print(" ");
-                uPlayer.setJob(jobclass.mainJob(pJob));
-
-                // Player embark
-                //dialogues.goddess3(uPlayer);
-
-                // Test Combat
-                System.out.println("Entering Combat Tutorial");
-                System.out.print(" ");
-                Combat combat = new Combat(uPlayer);
-                combat.setEntity(monsters.setMonster());
+            // Beginning of Stage
+            stage1.welcomeStage(); // Forest
+            // Initialize Stage 1 monsters
+            int totalMonsters = stage1.numOfMonsters[0] + stage1.numOfMonsters[1] - 1;
+            // Combat mode
+            for (x = 0; x <= totalMonsters; x++) {
+                combat.initializeEntity(stage1.monsters, stage1.numOfMonsters);
                 combat.CombatMode();
-                int y =0;
-                int monsterLoop = 2;
-                while(y < monsterLoop){
-                    y++;
-                    System.out.println("Another monster appeared!!! ");
-                    combat.setEntity(monsters.setMonster());
-                    combat.CombatMode();
                 }
-                break;
+                // Boss Monster
+                System.out.println(" Proceeding to boss fight");
+                dialogues.delay(1);
+                Monsters HobGoblin = new HobGoblin();
+                combat.setEntity(HobGoblin);
+                combat.CombatMode();
+                System.out.println(" Congratulations!!! You have defeated the boss monster!!!");
+                dialogues.delay(2);
+                System.out.println(" To be continued...");
             }
-        }
     }
 }

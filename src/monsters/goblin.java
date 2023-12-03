@@ -1,20 +1,20 @@
 package monsters;
-public class slime extends Monsters {
-    private String name ="Slime";
-    private final int experience = 3;
+
+public class goblin extends Monsters implements Stat{
+
+    private final String name ="Goblin";
+    private final int experience = 5;
     private final String job = "Monster";
-    private final int atk = 1;
-    private final int def = 1;
-    private final int hp = 10;
+    private final int atk = 8;
+    private final int def = 5;
+    private final int hp = 20;
     private final int mp = 10;
     private final int sp = 10;
 
-    public slime(){
-    super("Slime");
+    public goblin(){
+    super("Goblin");
     }
-    public void setName(String name){
-        this.name = name;
-    }
+
     @Override
     public String getName() {
         return this.name;
