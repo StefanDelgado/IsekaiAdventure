@@ -3,7 +3,7 @@ public class Player extends Combat implements Stat{
     protected int baseLevel;
     protected int experience;
     protected String job;
-    protected int atk = 100;
+    protected int atk = 10;
     protected int def = 5;
     protected int hp = 100;
     protected int mp = 10;
