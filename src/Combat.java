@@ -105,7 +105,6 @@ public class Combat {
     void resetEntity(){
         this.cEntityAttack  = eAtk;
         this.cEntityDefence = eDef;
-        this.cEntityHP      = eHP;
     }
     void resetPlayer(){
         this.cPlayerAtk = pAttack;
@@ -182,9 +181,9 @@ public class Combat {
                 byte playerDefend = (byte)(Math.random()*(max-min)+min);
                 System.out.println(" " + eName + " Choose to defend ");
                 if(playerDefend <= 12 && cPlayerAtk < cEntityDefence){
-                    System.out.println(" " + pname + " failed defend");
+                    System.out.println(" " + eName + " failed defend");
                 } else {
-                    System.out.println(" " + pname + " successfully defend");
+                    System.out.println(" " + eName + " successfully defend");
                     cPlayerAtk = 0;
                 }
         }
@@ -216,6 +215,7 @@ public class Combat {
             delay(2);
             System.out.println(" ");
             System.out.println(" What will you do?");
+            // Action
             boolean aLoop = true;
             while (aLoop) {
                 System.out.println(" Your stats: HP (" + cPlayerHP + "/" + pHP + ") MP (" + cPlayerMP + "/" + pMP + ") SP (" + cPlayerSP + "/" + pSP + ")" );

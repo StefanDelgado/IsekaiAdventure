@@ -11,8 +11,6 @@ public class Level extends Combat {
 
     public void lvlExperience(int exp, int lvl, int[] playerStats){
         int limitExp = 10 * (int) Math.pow(2, lvl - 1);
-        System.out.println(lvl);
-        System.out.println(limitExp);
         int expNeeded;
         if (exp >= limitExp) {
             lvl++;
