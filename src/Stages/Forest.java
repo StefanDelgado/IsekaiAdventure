@@ -21,7 +21,7 @@ public class Forest extends Stage{
         Monsters goblin = new goblin();
         Monsters boss = new HobGoblin();
         String[] monsterNames = {slime.getName(), goblin.getName(), boss.getName()};
-        int[] numOfMonsters = {10, 5, 1};
+        int[] numOfMonsters = {5, 5, 1};
         super.setMonsters(monsterNames, numOfMonsters);
     }
 }

@@ -5,9 +5,9 @@ public class HobGoblin extends Monsters implements Stat{
     String job = "Boss";
     int baseLevel = 5;
     int experience = 30;
-    int atk = 20;
+    int atk = 10;
     int def = 10;
-    int hp = 30;
+    int hp = 200;
     int mp = 5;
     int sp = 20;
     public String getName() {return this.name;}

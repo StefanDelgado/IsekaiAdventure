@@ -15,7 +15,6 @@ public class Combat {
     protected int eSP;
 
     // <------------- Player variables -------------> \\
-    int [] isAlive;
     protected String pname;
     private   String pJob;
     private   int plvl;
@@ -69,18 +68,18 @@ public class Combat {
         Monsters Slime = new slime();
         Monsters Goblin = new goblin();
         int remainingMonsters = 0;
-        for (int x = 0; x < Entity.length; x++) {
-            if (Entity[x].equals(Slime.getName()) && remainingMonsters <= numOfMonsters[x]) {
+        for (int x = 0; x < Entity.length;) {
+            numOfMonsters[x] -= 1;
+            if (Entity[x].equals(Slime.getName()) && numOfMonsters[x] > remainingMonsters  ) {
                 setEntity(Slime);
-                numOfMonsters[x] -= 1;
+                System.out.println(numOfMonsters[x] + " Slime Left");
                 break;
-            } else if (Entity[x].equals(Goblin.getName()) && remainingMonsters <= numOfMonsters[x]) {
+            } else if (Entity[x].equals(Goblin.getName()) && numOfMonsters[x] > remainingMonsters) {
                 setEntity(Goblin);
-                numOfMonsters[x] -= 1;
-                break;
-            } else {
+                System.out.println(numOfMonsters[x] + " Goblin Left");
                 break;
             }
+            x++;
         }
         }
 
@@ -169,29 +168,27 @@ public class Combat {
         switch (eAction){
             case 1:
                 System.out.println(" " + eName + " attacks " + pname);
-                System.out.println(" "+ pname + " took " + cEntityAttack + " damage!!");
                 if (pDefence < cEntityAttack) {
+
                     cPlayerHP = cPlayerHP - (cEntityAttack - pDefence);
                 } else {
                     cPlayerHP -= cEntityAttack;
                 }
+                System.out.println(" "+ pname + " took " + cEntityAttack + " damage!!");
                 break;
             case 2:
                 max = 20;
-                byte playerDefend = (byte)(Math.random()*(max-min)+min);
+                byte enemyDefend = (byte)(Math.random()*(max-min)+min);
                 System.out.println(" " + eName + " Choose to defend ");
-                if(playerDefend <= 12 && cPlayerAtk < cEntityDefence){
+                if(enemyDefend <= 12 && cPlayerAtk > cEntityDefence){
                     System.out.println(" " + eName + " failed defend");
                 } else {
                     System.out.println(" " + eName + " successfully defend");
-                    cPlayerAtk = 0;
+                    cEntityHP += cPlayerAtk - cEntityDefence;
                 }
         }
     }
     // Player is alive
-    void setIsAlive(){
-          isAlive = new int[]{pAttack, pDefence, pHP, pMP, pSP};
-    }
     // Main Combat method
     public void CombatMode() {
         Level level = new Level();
@@ -212,6 +209,9 @@ public class Combat {
             loop++;
 
             int[] playerStats= {pAttack, pDefence, pHP, pMP, pSP };
+            // Reset Attack and Defence Stats
+            resetEntity();
+            resetPlayer();
             delay(2);
             System.out.println(" ");
             System.out.println(" What will you do?");
@@ -244,7 +244,7 @@ public class Combat {
                             case 1: // Attack
                                 int cAtk = pAttack - eDef;
                                 System.out.println(" " + eName + " took " + cAtk + " damage");
-                                if (pAttack >= cEntityHP){
+                                if (pAttack > cEntityHP){
                                     cEntityHP = 0;
                                 } else {
                                     cEntityHP = cEntityHP - (pAttack - cEntityDefence);
@@ -265,6 +265,50 @@ public class Combat {
                                 aLoop = false;
                                 break;
                             case 3: // Items
+                                System.out.println("""
+                                 ********************************
+                                 1. Lesser Health Potion (Restores 10 HP) (Consumes 5 MP)
+                                 2. Health Potion (Restores 20 HP) (Consumes 10 MP)
+                                 ********************************
+                                """);
+                                System.out.print(" /> ");
+                                action = input.nextInt();
+                                switch (action) {
+                                    case 1: // Lesser Potion
+                                        try {
+                                            if (cPlayerMP >= 5) {
+                                                cPlayerHP += 10;
+                                                cPlayerMP -= 5;
+                                                if (cPlayerHP > pHP){
+                                                    cPlayerHP = pHP;
+                                                }
+                                                System.out.println(" " + pname + " used Lesser Health Potion");
+                                                System.out.println(" 10 Health restored !!!");
+                                            } else {
+                                                throw new Exception(" Not enough MP");
+                                            }
+                                        } catch (Exception e) {
+                                            System.out.println(" " + e.getMessage());
+                                        }
+                                        break;
+                                    case 2: // Health Potion
+                                        try {
+                                            if (cPlayerMP >= 10) {
+                                                cPlayerHP += 20;
+                                                cPlayerMP -= 10;
+                                                if (cPlayerHP > pHP){
+                                                    cPlayerHP = pHP;
+                                                }
+                                                System.out.println(" " + pname + " used Health Potion");
+                                                System.out.println(" 20 Health restored !!!");
+                                            } else {
+                                                throw new Exception(" Not enough mMP");
+                                            }
+                                        } catch (Exception e) {
+                                            System.out.println(" " + e.getMessage());
+                                        }
+                                        break;
+                                }
                                 aLoop = false;
                                 break;
                             case 4: // Flee
@@ -291,23 +335,33 @@ public class Combat {
                 delay(2);
                 pExp += exp;
 
-                System.out.println(pExp);
+                // Space
+                System.out.println();
+                System.out.println(" ******************************");
+                System.out.println();
+
+                // Check experience
                 level.lvlExperience(pExp, plvl, playerStats);
                 this.plvl = level.getLevel();
                 setPlayerStats(level.getPlayerStats(), level.getHadLevelUp());
+
+                // Space
+                System.out.println();
+                System.out.println(" ******************************");
+                System.out.println();
                 delay(2);
                 break;
             }
-            //
+
+
+
             if (flee == 3){
                 System.out.println(" You have successfully run away...");
                 break;
             }
             // Entity turn to action
             entityTurn();
-            // Reset Attack and Defence Stats
-            resetEntity();
-            resetPlayer();
+
             delay(2);
             // Game over
             if(cPlayerHP <= 0) {
@@ -315,7 +369,6 @@ public class Combat {
                 break;
             }
         }
-        setIsAlive();
         if (loop == combatLoop){
             System.out.println(" " + eName + " got bored and started to ignore you");
         }

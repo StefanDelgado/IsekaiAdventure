@@ -23,6 +23,7 @@ public class Main {
 
         int x;
         welcome();
+        System.out.print(" /> ");
         String start = input.nextLine();
 
         if (start.equals("x") || start.equals("X")) {
@@ -58,11 +59,28 @@ public class Main {
             stage1.welcomeStage(); // Forest
             // Initialize Stage 1 monsters
             int totalMonsters = stage1.numOfMonsters[0] + stage1.numOfMonsters[1] - 1;
+
+            stage1.numOfMonsters[0] +=1;
+            stage1.numOfMonsters[1] +=1;
+
             // Combat mode
+            /* Debugging
+            for (x = 0; x < totalMonsters; x++) {
+                combat.initializeEntity(commonEntity, stage1.numOfMonsters);
+                totalMonsters-= x;
+                System.out.println(" " + totalMonsters+" monsters left");
+                totalMonsters+= x;
+            }
+             */
             for (x = 0; x <= totalMonsters; x++) {
-                combat.initializeEntity(stage1.monsters, stage1.numOfMonsters);
+                String[] commonEntity = {stage1.monsters[0], stage1.monsters[1]};
+                combat.initializeEntity(commonEntity, stage1.numOfMonsters);
                 combat.CombatMode();
+                totalMonsters-= x;
+                System.out.println(" " + totalMonsters+" monsters left");
+                totalMonsters+= x;
                 }
+
                 // Boss Monster
                 System.out.println(" Proceeding to boss fight");
                 dialogues.delay(1);
