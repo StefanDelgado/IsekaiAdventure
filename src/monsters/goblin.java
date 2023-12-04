@@ -1,20 +1,21 @@
 package monsters;
 
 public class goblin extends Monsters implements Stat{
-
+    //<------- Goblin stats ------->
     private final String name ="Goblin";
-    private final int experience = 5;
+    private final int experience = 5; // How much exp can be obtained
     private final String job = "Monster";
-    private final int atk = 8;
-    private final int def = 5;
-    private final int hp = 20;
-    private final int mp = 10;
-    private final int sp = 10;
+    private final int atk = 8; // Attack power
+    private final int def = 5; // Defence power
+    private final int hp = 20; // Hit-points
+    private final int mp = 10; // Mana-points
+    private final int sp = 10; // Stamina-points
 
     public goblin(){
     super("Goblin");
-    }
+    } // passing monster name to parent class
 
+    // Getter method for stats
     @Override
     public String getName() {
         return this.name;
@@ -26,8 +27,7 @@ public class goblin extends Monsters implements Stat{
     }
     @Override
     public int getBaseLevel(){
-        int baseLevel = 1;
-        return baseLevel;}
+        return 1;}
     @Override
     public int getExperience(){return this.experience;}
 

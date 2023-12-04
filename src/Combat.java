@@ -3,7 +3,6 @@ import java.util.*;
 import monsters.*;
 import java.lang.Math;
 public class Combat {
-
     static Scanner input = new Scanner(System.in);
 
     // <------------- Stat variables -------------> \\
@@ -83,7 +82,6 @@ public class Combat {
         }
         }
 
-    // Setting Entity
     public void setEntity(Monsters monsters){
         this.eName          = monsters.getName();
         this.eJob           = monsters.getJob();
@@ -99,16 +97,17 @@ public class Combat {
         this.cEntityHP      = eHP;
         this.cEntityMP      = eMP;
         this.cEntitySP      = eSP;
-    }
+    } // Setting Entity
 
     void resetEntity(){
         this.cEntityAttack  = eAtk;
         this.cEntityDefence = eDef;
-    }
+    } // Resetting Entity's ATK and DEF
     void resetPlayer(){
         this.cPlayerAtk = pAttack;
         this.cPlayerDef = pDefence;
-    }
+    } // Resetting Player's ATK and DEF
+
     // Setting player level up stats
     public void setPlayerStats(int[] playerStats, boolean hadLevelUp){
         this.pAttack = playerStats[0];
@@ -133,7 +132,6 @@ public class Combat {
         }
     }
 
-    // Show player status
     public void showStatus(){
         System.out.println(" Your Status: ");
         System.out.println(" Name: " + pname);
@@ -144,9 +142,8 @@ public class Combat {
         System.out.println(" SP  : " + pSP);
         System.out.println(" ATK : " + pAttack);
         System.out.println(" DEF : " + pDefence);
-    }
+    } // Show player status
 
-    // Show enemy Status
     public void examine(){
         System.out.println(" Enemy Status: ");
         System.out.println(" Name: " + eName);
@@ -157,7 +154,7 @@ public class Combat {
         System.out.println(" SP  : " + eSP);
         System.out.println(" ATK : " + cEntityAttack);
         System.out.println(" DEF : " + cEntityDefence);
-    }
+    } // Show enemy Status
 
     // Enemy Action
     public void entityTurn(){
@@ -188,11 +185,12 @@ public class Combat {
                 }
         }
     }
-    // Player is alive
+
     // Main Combat method
-    public void CombatMode() {
+    public void combatMode() {
         Level level = new Level();
 
+        // Combat Message
         System.out.println(" ");
         System.out.println(" You have entered in combat");
         delay(1);
@@ -201,25 +199,29 @@ public class Combat {
         delay(2);
         System.out.println(" A "+ eName +" appeared");
 
-
+        // Initiate combat variables
         int combatLoop = 10;
         int loop = 0;
         byte flee = 0;
-        while (loop < combatLoop) {
+        while (loop < combatLoop) { // Loop for combat class
             loop++;
 
-            int[] playerStats= {pAttack, pDefence, pHP, pMP, pSP };
+            int[] playerStats= {pAttack, pDefence, pHP, pMP, pSP }; // Resetting Player's Stats
             // Reset Attack and Defence Stats
             resetEntity();
             resetPlayer();
+
             delay(2);
             System.out.println(" ");
             System.out.println(" What will you do?");
             // Action
             boolean aLoop = true;
             while (aLoop) {
+                // Player and Enemy Display
                 System.out.println(" Your stats: HP (" + cPlayerHP + "/" + pHP + ") MP (" + cPlayerMP + "/" + pMP + ") SP (" + cPlayerSP + "/" + pSP + ")" );
                 System.out.println(" " + eName + " stats: HP (" + cEntityHP + "/" + eHP + ") MP (" + cEntityMP + "/" + eMP + ") SP (" + cEntitySP + "/" + eSP + ")" );
+
+                // Action Window
                 System.out.println("""
                          ********************************
                          1. Action
@@ -229,6 +231,8 @@ public class Combat {
                         """);
                 System.out.print(" /> ");
                 int action = input.nextInt();
+
+                // Switch for action choice
                 switch (action) {
                     case 1: // Action
                         System.out.println("""
@@ -240,7 +244,7 @@ public class Combat {
                                 """);
                         System.out.print(" /> ");
                         action = input.nextInt();
-                        switch (action){
+                        switch (action){ // Switch for Player Actions
                             case 1: // Attack
                                 int cAtk = pAttack - eDef;
                                 System.out.println(" " + eName + " took " + cAtk + " damage");
@@ -255,7 +259,7 @@ public class Combat {
                                 System.out.print(" " + pname + " is defending");
                                 byte min = 1;
                                 byte max = 20;
-                                byte playerDefend = (byte) (Math.random() * (max - min) + min);
+                                byte playerDefend = (byte) (Math.random() * (max - min) + min); // Chances for successful Defence
                                 if (playerDefend <= 12) {
                                     System.out.println(" " + pname + " failed defend");
                                 } else {
@@ -353,8 +357,7 @@ public class Combat {
                 break;
             }
 
-
-
+            // Flee tally
             if (flee == 3){
                 System.out.println(" You have successfully run away...");
                 break;
@@ -369,6 +372,7 @@ public class Combat {
                 break;
             }
         }
+        // If combat extends for too long
         if (loop == combatLoop){
             System.out.println(" " + eName + " got bored and started to ignore you");
         }

@@ -1,16 +1,15 @@
 import java.util.Scanner;
 public class dialogues {
     static Scanner input = new Scanner(System.in);
-    static Player uPlayer = new Player();
     public static void delay(int secondsToSleep){
         try {
-            Thread.sleep(secondsToSleep * 1000);
+            Thread.sleep(secondsToSleep * 1000L);
         } catch (InterruptedException ex) {
             ex.printStackTrace();
         }
     }
 
-    static void goddess1(){
+    static void goddess1(){ // Skipped
         System.out.println(" ");
         System.out.println(" **************************************************");
         System.out.println(" Introduction");
@@ -61,7 +60,7 @@ public class dialogues {
         System.out.println(" ???:");
         System.out.println(" I am....");
     }
-    static void goddess2(Player uPlayer) {
+    static void goddess2(Player uPlayer) { // Skipped
         System.out.println(" Isolde:");
         System.out.println(" " + uPlayer.getName() + " , mortal who was destined by fate, you stand before me, Isolde, the goddess who governs life and death.");
         delay(3);
@@ -91,7 +90,7 @@ public class dialogues {
                 """);
 
     }
-    static void goddess3(Player uPlayer) {
+    static void goddess3(Player uPlayer) { // Skipped
         System.out.println(" Isolde:");
         System.out.println(" Excellent choice");
         System.out.print(" > Enter to continue...");

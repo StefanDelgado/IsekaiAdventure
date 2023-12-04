@@ -1,17 +1,20 @@
 package monsters;
 public class slime extends Monsters {
+    //<------- HobGoblin stats ------->
     private String name ="Slime";
-    private final int experience = 3;
+    private final int experience = 3; // How much exp can be obtained
     private final String job = "Monster";
-    private final int atk = 1;
-    private final int def = 1;
-    private final int hp = 10;
-    private final int mp = 10;
-    private final int sp = 10;
+    private final int atk = 1; // Attack power
+    private final int def = 1; // Defence power
+    private final int hp = 10; // Hit-points
+    private final int mp = 10; // Mana-points
+    private final int sp = 10; // Stamina-points
 
+    // Constructor
     public slime(){
     super("Slime");
     }
+    // Getter method for stats
     public void setName(String name){
         this.name = name;
     }
@@ -26,8 +29,7 @@ public class slime extends Monsters {
     }
     @Override
     public int getBaseLevel(){
-        int baseLevel = 1;
-        return baseLevel;}
+        return 1;}
     @Override
     public int getExperience(){return this.experience;}
 

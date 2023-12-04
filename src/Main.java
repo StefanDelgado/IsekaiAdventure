@@ -2,8 +2,8 @@ import java.util.Scanner;
 import monsters.*;
 import Stages.*;
 public class Main {
-    static Scanner input = new Scanner(System.in);
-    static void welcome(){
+    static Scanner input = new Scanner(System.in); // Scanner class
+    static void welcome(){ // Game Title
         System.out.println(" Humbles presents");
         dialogues.delay(2);
         System.out.println(" ");
@@ -16,20 +16,22 @@ public class Main {
     }
     public static void main(String[] args) {
         //dialogues message = new dialogues();
-        Player uPlayer = new Player();
         //JobClass jobclass = new JobClass();
+
+        Player uPlayer = new Player();
         Stage stage1 = new Forest();
         Combat combat;
 
         int x;
+
+        // Game title Message
         welcome();
         System.out.print(" /> ");
         String start = input.nextLine();
-
+        // Game Start
         if (start.equals("x") || start.equals("X")) {
             System.out.println(" Adventure shutting down...");
         } else {
-            System.out.flush();
             // Introduction
             //dialogues.goddess1();
 
@@ -57,9 +59,11 @@ public class Main {
 
             // Beginning of Stage
             stage1.welcomeStage(); // Forest
+
             // Initialize Stage 1 monsters
             int totalMonsters = stage1.numOfMonsters[0] + stage1.numOfMonsters[1] - 1;
 
+            // Correcting num of monsters
             stage1.numOfMonsters[0] +=1;
             stage1.numOfMonsters[1] +=1;
 
@@ -70,12 +74,13 @@ public class Main {
                 totalMonsters-= x;
                 System.out.println(" " + totalMonsters+" monsters left");
                 totalMonsters+= x;
-            }
-             */
-            for (x = 0; x <= totalMonsters; x++) {
-                String[] commonEntity = {stage1.monsters[0], stage1.monsters[1]};
-                combat.initializeEntity(commonEntity, stage1.numOfMonsters);
-                combat.CombatMode();
+            } */
+            for (x = 0; x <= totalMonsters; x++) { // Loop for multiple monsters
+                String[] commonEntity = {stage1.monsters[0], stage1.monsters[1]}; // Initializer for common enemies
+                combat.initializeEntity(commonEntity, stage1.numOfMonsters); // Give values to Combat class
+                combat.combatMode(); // Combat method
+
+                // Letting the player know how many monsters are left
                 totalMonsters-= x;
                 System.out.println(" " + totalMonsters+" monsters left");
                 totalMonsters+= x;
@@ -86,9 +91,11 @@ public class Main {
                 dialogues.delay(1);
                 Monsters HobGoblin = new HobGoblin();
                 combat.setEntity(HobGoblin);
-                combat.CombatMode();
+                combat.combatMode();
                 System.out.println(" Congratulations!!! You have defeated the boss monster!!!");
                 dialogues.delay(2);
+
+                // Cliche ending
                 System.out.println(" To be continued...");
             }
     }

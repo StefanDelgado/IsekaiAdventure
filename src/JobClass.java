@@ -1,3 +1,6 @@
+/*
+Note: Work in Progress
+ */
 public class JobClass {
     private String Mainjob;
 
@@ -13,8 +16,5 @@ public class JobClass {
             this.Mainjob ="mage";
         }
         return Mainjob;
-    }
-    public void warrior(){
-
     }
 }
