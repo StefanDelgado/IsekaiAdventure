@@ -182,6 +182,9 @@ public class Combat {
                 } else {
                     System.out.println(" " + eName + " successfully defend");
                     cEntityHP += cPlayerAtk - cEntityDefence;
+                    if (cEntityHP > eHP){
+                        cEntityHP = eHP;
+                    }
                 }
         }
     }
@@ -200,7 +203,7 @@ public class Combat {
         System.out.println(" A "+ eName +" appeared");
 
         // Initiate combat variables
-        int combatLoop = 10;
+        int combatLoop = 50;
         int loop = 0;
         byte flee = 0;
         while (loop < combatLoop) { // Loop for combat class
