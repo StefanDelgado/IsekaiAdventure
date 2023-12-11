@@ -2,15 +2,15 @@ package monsters;
 
 public abstract class Monsters implements Stat{
     //<-------Monster stats ------->
-    private String name = " Monsters name";
-    private String job;
-    private int baseLevel;
-    private int experience;
-    private int atk;
-    private int def;
-    private int hp;
-    private int mp;
-    private int sp;
+    String name = " Monsters name";
+    String job;
+    int baseLevel;
+    int experience;
+    int atk;
+    int def;
+    int hp;
+    int mp;
+    int sp;
 
     public Monsters(String name) {
         this.name = name;

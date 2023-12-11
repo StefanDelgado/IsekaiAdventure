@@ -1,6 +1,6 @@
 package monsters;
 public class slime extends Monsters {
-    //<------- HobGoblin stats ------->
+    //<------- Slime stats ------->
     private String name ="Slime";
     private final int experience = 3; // How much exp can be obtained
     private final String job = "Monster";

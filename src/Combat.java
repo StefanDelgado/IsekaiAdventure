@@ -71,11 +71,11 @@ public class Combat {
             numOfMonsters[x] -= 1;
             if (Entity[x].equals(Slime.getName()) && numOfMonsters[x] > remainingMonsters  ) {
                 setEntity(Slime);
-                System.out.println(numOfMonsters[x] + " Slime Left");
+                System.out.println(" " + numOfMonsters[x] + " Slime Left");
                 break;
             } else if (Entity[x].equals(Goblin.getName()) && numOfMonsters[x] > remainingMonsters) {
                 setEntity(Goblin);
-                System.out.println(numOfMonsters[x] + " Goblin Left");
+                System.out.println(" " + numOfMonsters[x] + " Goblin Left");
                 break;
             }
             x++;
@@ -178,7 +178,7 @@ public class Combat {
                 byte enemyDefend = (byte)(Math.random()*(max-min)+min);
                 System.out.println(" " + eName + " Choose to defend ");
                 if(enemyDefend <= 12 && cPlayerAtk > cEntityDefence){
-                    System.out.println(" " + eName + " failed defend");
+                    System.out.println(" " + eName + " to failed defend");
                 } else {
                     System.out.println(" " + eName + " successfully defend");
                     cEntityHP += cPlayerAtk - cEntityDefence;
